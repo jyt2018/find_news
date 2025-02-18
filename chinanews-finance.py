@@ -35,7 +35,7 @@ if response.status_code == 200:
         # description = item.find('description').text
 
         if title:
-            content += f'{i}. {title}\n\n'
+            content += f'{i}. {title}\n'
             # if description:
             #     content += description + '\n'
 
