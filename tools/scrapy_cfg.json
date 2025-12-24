@@ -1,0 +1,171 @@
+{
+  "article_item": {
+    "type": "bs4_find_all",
+    "selector": "article"
+  },
+  "article_meta": {
+    "url": {
+      "type": "bs4_find_all",
+      "selector": "a",
+      "filters": [
+        {
+          "attr": "href",
+          "startswith": "{https://www.gpsworld.com}"
+        },
+        {
+          "attr": "href",
+          "not_in": [
+            "/category/",
+            "/page/"
+          ]
+        }
+      ],
+      "extract": "href",
+      "limit": 1,
+      "post_process": [
+        "make_absolute"
+      ]
+    },
+    "title": {
+      "type": "bs4_find",
+      "selector": [
+        "h1",
+        "h2",
+        "h3",
+        "h4"
+      ],
+      "extract": "text",
+      "sub_selectors": [
+        {
+          "type": "bs4_find",
+          "selector": "a",
+          "extract": "text"
+        },
+        {
+          "type": "bs4_find",
+          "selector": "a",
+          "extract": "href",
+          "key": "url_fallback",
+          "post_process": [
+            "make_absolute"
+          ]
+        }
+      ]
+    },
+    "category": {
+      "parent": {
+        "type": "bs4_find",
+        "selector": {
+          "tag": "div",
+          "class_": "card-body"
+        }
+      },
+      "type": "bs4_find",
+      "selector": {
+        "tag": "div",
+        "class_": "entry-categories"
+      },
+      "sub_selectors": [
+        {
+          "type": "bs4_find",
+          "selector": "a",
+          "extract": "text",
+          "key": "category"
+        },
+        {
+          "type": "bs4_find",
+          "selector": "a",
+          "extract": "href",
+          "key": "category_url",
+          "post_process": [
+            "make_absolute"
+          ]
+        }
+      ]
+    },
+    "author": {
+      "parent": {
+        "type": "bs4_find",
+        "selector": {
+          "tag": "div",
+          "class_": "card-body"
+        }
+      },
+      "methods": [
+        {
+          "type": "bs4_find",
+          "selector": {
+            "tag": "div",
+            "class_": "entry-author"
+          },
+          "extract": "text",
+          "post_process": [
+            "strip_prefix",
+            {
+              "prefix": "By "
+            }
+          ]
+        },
+        {
+          "type": "bs4_find",
+          "selector": {
+            "tag": "span",
+            "class_": "author vcard"
+          },
+          "sub_selectors": [
+            {
+              "type": "bs4_find",
+              "selector": {
+                "tag": "a",
+                "class_": "url fn n"
+              },
+              "extract": "text"
+            }
+          ]
+        },
+        {
+          "type": "xpath",
+          "selector": "//span[@class='author vcard']",
+          "extract": "text()",
+          "fallback_parent": "container"
+        }
+      ]
+    },
+    "publish_time": {
+      "parent": {
+        "type": "bs4_find",
+        "selector": {
+          "tag": "div",
+          "class_": "card-body"
+        }
+      },
+      "type": "bs4_find",
+      "selector": {
+        "tag": "time",
+        "class_": "entry-date"
+      },
+      "extract": "text"
+    },
+    "excerpt": {
+      "parent": {
+        "type": "bs4_find",
+        "selector": {
+          "tag": "div",
+          "class_": "card-body"
+        }
+      },
+      "type": "bs4_find",
+      "selector": {
+        "tag": "div",
+        "class_": "entry-excerpt"
+      },
+      "extract": "text"
+    },
+    "thumbnail": {
+      "type": "bs4_find",
+      "selector": "img",
+      "extract": "src",
+      "default": ""
+    }
+  }
+}

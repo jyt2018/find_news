@@ -1,0 +1,10 @@
+parent 父节点信息？
+type 提取手段[bs4_find,bs4_find_all,xpath]
+selector 提取目标例如 'h2.entry-title a' or ('h2.entry-title', {'class': 'entry-title'}) or {'class': 'entry-title'} or ['h1','h2']
+extract
+filters 过滤掉一些东西的过滤器，分为以某开头、不包含两个方法
+limit find_all用，控制返回数量，find没有这个
+key url_fallback/?
+post_process 继续深入？
+sub_selectors 继续深入？
+method ?
