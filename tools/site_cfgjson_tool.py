@@ -139,15 +139,16 @@ if __name__ == '__main__':
     # 应该分两步，第一步确定文章条目的标签，应该是一个列表，例如10个<article>标签, article也应该在配置文件里，因为有可能是li
     if article_item_conf['type'] == 'bs4_find_all':
         article_containers = soup.find_all(article_item_conf['selector'])
-        print(len(article_containers), "\n")
+        print(len(article_containers), "篇\n")
 
         if not article_containers:
-            print("No article containers found, trying meta containers...")
+            print("No article containers found, 拉到了...")
             exit(1)
 
         # 第二步，遍历每个文章条目，提取各个文章条目的通用7要素element(标题 作者 日期 摘要 链接 分类标签 小图片)
         for article_item_node in article_containers:
-            articles = parse_articles(article_item_node, article_meta_conf, c_tag) # c_tag的作用是把版块信息传递给文章
+            # 每次处理一篇文章
+            article_item = parse_articles(article_item_node, article_meta_conf, c_tag) # c_tag的作用是把版块信息传递给文章
             print("\n")
-            print(articles)
+            print(article_item)
 
