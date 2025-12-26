@@ -1,0 +1,63 @@
+{
+    "article_meta": {
+        "article_url": {
+            "type": "bs4_find_all",
+            "selector": "a",
+            "extract": "href",
+            "limit": 1
+        },
+        "article_title": {
+            "type": "bs4_find",
+            "selector": "h4",
+            "extract": "text",
+            "limit": 1
+        },
+        "author": {
+            "type": "bs4_find",
+            "selector": {
+                "name": "a",
+                "class_": "btn approch1-author"
+            },
+            "extract": "text",
+            "limit": 1,
+            "post_process": [
+                {
+                    "replace": {
+                        "from": "By ",
+                        "to": ""
+                    }
+                }
+            ],
+            "parent": {
+                "type": "bs4_find",
+                "selector": {
+                    "name": "div",
+                    "class_": "col-xs-12 col-sm-8 col-sm-8 gutter-left-20"
+                },
+                "extract": "text",
+                "limit": 1,
+                "filters": []
+            }
+        },
+        "article_date": {
+            "type": "bs4_find",
+            "selector": {
+                "name": "span",
+                "class_": "approch1-date"
+            },
+            "extract": "text",
+            "limit": 1
+        },
+        "excerpt": {
+            "type": "bs4_find",
+            "selector": "p",
+            "extract": "text"
+        },
+        "thumbnail": {
+            "type": "bs4_find",
+            "selector": "img",
+            "extract": "src",
+            "limit": 1
+        }
+    }
+}

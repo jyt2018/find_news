@@ -1,0 +1,6 @@
+{
+  "article_item": {
+    "type": "bs4_find_all",
+    "selector": "article"
+  }
+}

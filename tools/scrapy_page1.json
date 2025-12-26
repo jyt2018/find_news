@@ -1,0 +1,11 @@
+{
+  "article_item": {
+    "type": "bs4_find_all",
+    "selector": {
+      "name": "article",
+      "class_": "post"
+    },
+    "extract": "text",
+    "limit": 1
+  }
+}

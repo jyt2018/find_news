@@ -1,10 +1,21 @@
-parent 父节点信息？
+parent 父节点信息？ 下面只有type selector 
+method ?list, 下面有 type selector extract post_process sub_selectors fallback_parent
 type 提取手段[bs4_find,bs4_find_all,xpath]
 selector 提取目标例如 'h2.entry-title a' or ('h2.entry-title', {'class': 'entry-title'}) or {'class': 'entry-title'} or ['h1','h2']
-extract
+extract 提取点，默认是text，也可能是href(a) src(img)
 filters 过滤掉一些东西的过滤器，分为以某开头、不包含两个方法
 limit find_all用，控制返回数量，find没有这个
 key url_fallback/?
-post_process 继续深入？
+post_process str后续处理，用于地址补全（/abc http://www.ttt.com/abc,这个已经删除，等全部抓完后一并处理落地的json，应该只在url和thumbnail里），简单字符串替换（by: author author）
 sub_selectors 继续深入？
-method ?
+
+
+
+build_cfgjson.py里 tab_a , add 2 controls:
+soup_edt, is a single line editor, contains a path to a file(as souphtml)
+testbtn, is a button.
+when user click testbtn, 
+visit souphtml, 使用tab_a里的信息，获取
+
+
+
